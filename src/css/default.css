@@ -1,0 +1,52 @@
+*{margin:0;padding:0;}
+*{box-sizing:border-box;}
+*::before{box-sizing:border-box;}
+*::after{box-sizing:border-box;}
+ul,ol{list-style:none;}
+a{color:inherit; text-decoration:none;}
+
+.page{
+    font-size:16px;
+    display: flex;
+    height:100vh;
+}
+.page > aside{
+flex-direction:column;
+display: flex;
+}
+.newSong{
+text-align: center;
+border-bottom:1px solid #999;
+padding:10px;
+}
+.songList{
+flex-grow:1;
+}
+.songList>li{
+padding:5px 10px;
+border-bottom:1px solid #ddd;
+}
+.page > aside .uploadArea{
+
+}
+.dragable{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    width:200px;
+    border:2px dashed #ddd;
+    border-radius:10px;
+    padding:20px 0;
+    flex-direction:column;
+    color:#ddd;
+}
+.clickable{
+cursor:pointer;
+}
+#uploadStatus{
+   height:20px;
+}
+.page > main{
+border:1px solid green;
+flex-grow:1;
+}

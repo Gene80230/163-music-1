@@ -6,30 +6,64 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理页面</title>
     <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
+    <link rel="stylesheet" href="./css/default.css">
     <style>
-    *{margin:0;padding:0;}
-    #yyy{
-        display: flex;
-        justify-content:center;
-        align-items:center;
-        width:200px;
-        border:2px dashed #ddd;
-        border-radius:10px;
-        padding:50px 80px;
-        flex-direction:column;
-        color:#ddd;
-    }
-    #uploadStatus{
-       height:20px;
-    }
+    
     </style>
 </head>
 <body>
-<div id="yyy">
-    <span id="xxx">点击或拖拽至此处上传</span>
-    <div id="uploadStatus"></div>
+
+<div class="page">
+    <aside>
+        <div class="newSong">新建歌曲</div>
+        <ul class="songList">
+            <li>歌曲1</li>
+            <li>歌曲2</li>
+            <li>歌曲3</li>
+            <li>歌曲4</li>
+            <li>歌曲5</li>
+            <li>歌曲6</li>
+            <li>歌曲7</li>
+            <li>歌曲8</li>
+            <li>歌曲9</li>
+            <li>歌曲10</li>
+        </ul>
+        <div class="uploadArea">
+            <div id="uploadContainer" class="dragable">
+                <div id="uploadButton" class="clickable">
+                    <span>点击或拖拽至此处上传</span>
+                </div>
+                <div id="uploadStatus"></div>
+            </div>
+        </div>
+    </aside>
+    <main>
+        <form class="form">
+            <div class="row">
+                <label>
+                    歌曲名<input type="text">
+                </label>
+            </div>
+            <div class="row">
+                <label>
+                    歌手名<input type="text">
+                </label>
+            </div>
+            <div class="row">
+                <label>
+                    外链<input type="text">
+                </label>
+            </div>
+            <div class="row">
+                <button type="submit">上传</button>
+            </div>
+        </form>
+    </main>
+
 </div>
-<audio controls src="http://pn2v9hyar.bkt.clouddn.com/%E8%B5%B7%E9%A3%8E%E4%BA%86-%E6%9E%97%E4%BF%8A%E6%9D%B0%20.mp3"></audio>
+
+<!-- <audio controls src="http://pn2v9hyar.bkt.clouddn.com/%E8%B5%B7%E9%A3%8E%E4%BA%86-%E6%9E%97%E4%BF%8A%E6%9D%B0%20.mp3"></audio> -->
+
 <script src="../node_modules/plupload/js/moxie.js"></script>
 <script src="../node_modules/plupload/js/plupload.min.js"></script>
 <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
@@ -61,7 +95,7 @@ AV.init({
 <script>
   var uploader = Qiniu.uploader({
             runtimes: 'html5',      // 上传模式，依次退化
-            browse_button: 'xxx',         // 上传选择的点选按钮，必需
+            browse_button: 'uploadButton',         // 上传选择的点选按钮，必需
             uptoken_url: 'http://localhost:8888/uptoken',
             // 在初始化时，uptoken，uptoken_url，uptoken_func三个参数中必须有一个被设置
             // 切如果提供了多个，其优先级为uptoken > uptoken_url > uptoken_func
@@ -77,10 +111,10 @@ AV.init({
             // Ajax请求downToken的Url，私有空间时使用，JS-SDK将向该地址POST文件的key和domain，服务端返回的JSON必须包含url字段，url值为该文件的下载地址
             // unique_names: true,              // 默认false，key为文件名。若开启该选项，JS-SDK会为每个文件自动生成key（文件名）
             // save_key: true,                  // 默认false。若在服务端生成uptoken的上传策略中指定了sava_key，则开启，SDK在前端将不对key进行任何处理
-            domain: 'http://pm0sn8lm5.bkt.clouddn.com',      // bucket域名，下载资源时用到，必需
+            domain: 'http://pn2v9hyar.bkt.clouddn.com',      // bucket域名，下载资源时用到，必需
             max_file_size: '40mb',             // 最大文件体积限制
             dragdrop: true,                     // 开启可拖曳上传
-            drop_element: 'yyy',          // 拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+            drop_element: 'uploadContainer',          // 拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
             auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
             init: {
                 'FilesAdded': function(up, files) {
@@ -92,12 +126,11 @@ AV.init({
                         // 每个文件上传前，处理相关的事情
                 },
                 'UploadProgress': function(up, file) {
-                    // uploadStatus.textContent = '上传中，请稍后'
                         // 每个文件上传时，处理相关的事情
                     uploadStatus.textContent='文件上传中...'
                 },
                 'FileUploaded': function(up, file, info) {
-                    // uploadStatus.textContent = '上 传 成 功'
+                    uploadStatus.textContent = '上 传 成 功'
                         // 每个文件上传成功后，处理相关的事情
                         // 其中info.response是文件上传成功后，服务端返回的json，形式如：
                         // {
@@ -105,7 +138,10 @@ AV.init({
                         //    "key": "gogopher.jpg"
                         //  }
                         // 查看简单反馈
-                        uploadStatus.textContent='上传成功'
+                 var domain = up.getOption('domain');
+                 var response = JSON.parse(info.response);
+                 var sourceLink = domain +"/"+ encodeURIComponent(response.key); //获取上传成功后的文件的Url
+                    console.log(sourceLink)
                 },
                 'Error': function(up, err, errTip) {
                         //上传出错时，处理相关的事情
