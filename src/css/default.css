@@ -38,6 +38,7 @@ border-bottom:1px solid #ddd;
 height:30px;
 line-height:30px;
 overflow:hidden;
+cursor:pointer;
 }
 .songList>.active{
 background:#ddd;
