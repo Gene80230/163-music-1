@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/index.css">
+    <script src="//at.alicdn.com/t/font_395875_4hwrep7mypx8ncdi.js"></script>
     <title>云音乐播放器</title>
 </head>
 <body>
@@ -18,9 +19,9 @@
             </section>
             <section id="tabs" class="globalTabs">
                 <ol class="tabs-nav">
-                    <li class="active"><div class="text">推荐音乐</div></li>
-                    <li><div class="text">热歌榜</div></li>
-                    <li><div class="text">搜索</div></li>
+                    <li class="active" data-tab-name="page-1"><div class="text">推荐音乐</div></li>
+                    <li data-tab-name="page-2"><div class="text">热歌榜</div></li>
+                    <li data-tab-name="page-3"><div class="text">搜索</div></li>
                 </ol>
             </section>
         </div>
@@ -92,6 +93,14 @@
             </li>
         </ol>
     </div>
-    <script src="//at.alicdn.com/t/font_395875_4hwrep7mypx8ncdi.js"></script>
+
+<script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="./js/initializers/av.js"></script>
+<script src="./js/admin/event-hub.js"></script>
+<script src="./js/index/tabs.js"></script>
+<script src="./js/index/page-1.js"></script>
+<script src="./js/index/page-2.js"></script>
+<script src="./js/index/page-3.js"></script>
 </body>
 </html>
