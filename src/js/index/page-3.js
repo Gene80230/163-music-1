@@ -20,14 +20,14 @@
             this.bindEventHub()
         },
         bindEventHub(){
-        window.eventHub.on('selectTab',(tabName)=>{
-            if(tabName === 'page-3'){
-                this.view.show()
-            }else{
-                this.view.hide()
-            }
-          })
+            window.eventHub.on('selectTab' ,(tabName)=>{
+                if(tabName === 'page-3'){
+                    this.view.show()
+                }else{
+                    this.view.hide()
+                }
+            })
         }
     }
-    controller.init(view,model)
+    controller.init(view, model)
 }

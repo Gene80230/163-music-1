@@ -26,6 +26,12 @@
                 <input name="url" type="text"  value="__url__">
             </div>
             <div class="row">
+                <label>
+                    歌曲封面:
+                </label>
+                <input name="cover" type="text"  value="__cover__">
+            </div>
+            <div class="row">
                     <label>
                            
                     </label>
@@ -34,7 +40,7 @@
         </form>
         `,
         render(data = {}){
-            let placeholders = ['name', 'singer', 'url', 'id']
+            let placeholders = ['name', 'singer', 'url', 'id', 'cover']
             let html = this.template
             placeholders.map((string)=>{
                 html = html.replace(`__${string}__`, data[string] || '')
@@ -52,7 +58,7 @@
     }
     let model = {
         data: {
-            name:'', singer:'', url:'', id:'' 
+            name:'', singer:'', url:'', id:'', cover:'' 
         },
         update(data){
             // 第一个参数是 className，第二个参数是 objectId
@@ -61,7 +67,9 @@
             song.set('name', data.name);
             song.set('singer', data.singer);
             song.set('url', data.url);
+            song.set('cover', data.cover);
             // 保存到云端
+            console.log(song)
             return song.save().then((response)=>{
                 Object.assign(this.data, data)
                 return response
@@ -76,6 +84,7 @@
         song.set('name',data.name);
         song.set('singer',data.singer);
         song.set('url',data.url);
+        song.set('cover', data.cover);
         return song.save().then((newSong)=>{
             let {id, attributes} = newSong
             // this.data.id = id
@@ -111,19 +120,19 @@
             })
         },
         update(){
-            let needs = 'name singer url'.split(' ')
+            let needs = 'name singer url cover'.split(' ')
             let data = {}
             needs.map((string)=>{
                 data[string]=this.view.$el.find(`[name="${string}"]`).val()
             })
             this.model.update(data)
                 .then(()=>{
-                   
+                    
                     window.eventHub.emit('update', JSON.parse(JSON.stringify(this.model.data)))
                 })
         },
         create(){
-            let needs = 'name singer url'.split(' ')
+            let needs = 'name singer url cover'.split(' ')
             let data = {}
             needs.map((string)=>{
                 data[string]=this.view.$el.find(`[name="${string}"]`).val()

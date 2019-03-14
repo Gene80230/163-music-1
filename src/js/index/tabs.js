@@ -1,6 +1,6 @@
 {
     let view = {
-        el:"#tabs",
+        el:'#tabs',
         init(){
             this.$el = $(this.el)
         }
@@ -14,7 +14,7 @@
             this.bindEvents()
         },
         bindEvents(){
-            this.view.$el.on('click','.tabs-nav > li',(e)=>{
+            this.view.$el.on('click','.tabs-nav > li', (e)=>{
                 let $li = $(e.currentTarget)
                 let tabName = $li.attr('data-tab-name')
                 $li.addClass('active')
