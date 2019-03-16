@@ -89,6 +89,14 @@ display:inline-block;
 width:5em;
 text-align:right;
 }
+.form textarea{
+border-radius:5px;
+border:1px solid #ddd;
+margin:0px 15px;
+width:175px;
+height:100px;  
+
+}
 .form input[type=text]{
 border-radius:5px;
 border:1px solid #ddd;
