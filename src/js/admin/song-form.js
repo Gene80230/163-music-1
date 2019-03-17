@@ -32,15 +32,9 @@
                 <input name="cover" type="text"  value="__cover__">
             </div>
             <div class="row">
-                <label>
-                    歌词:
-                </label>
-                <textarea name="lyrics">__lyrics__</textarea>
+                <textarea name="lyrics" placeholder="歌词上传区域">__lyrics__</textarea>
             </div>
             <div class="row">
-                    <label>
-                           
-                    </label>
                 <button type="submit">提交</button>
             </div>
         </form>

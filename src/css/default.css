@@ -93,8 +93,8 @@ text-align:right;
 border-radius:5px;
 border:1px solid #ddd;
 margin:0px 15px;
-width:175px;
-height:100px;  
+width:255px;
+height:210px;  
 
 }
 .form input[type=text]{
@@ -106,7 +106,7 @@ height:25px;
 .form input[type=submit],
 .form input[type=button],
 .form button{
-width:175px;
+width:255px;
 border-radius:5px;
 border:1px solid #FF6666;
 margin:5px 15px;

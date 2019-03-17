@@ -1,4 +1,4 @@
-{
+{   
     let view = {
         el:'section.songs',
         template:`
@@ -40,7 +40,7 @@
             var query = new AV.Query('Song');
             return query.find().then((songs)=>{
                 this.data.songs = songs.map((song)=>{
-                    return {id: song.id, ...song.attributes}
+                    return Object.assign({id: song.id}, song.attributes)
                 })
                 return songs
             })
@@ -51,7 +51,9 @@
             this.view = view
             this.view.init()
             this.model = model
+            
             this.model.find().then(()=>{
+                
                 this.view.render(this.model.data)
             })
         }
